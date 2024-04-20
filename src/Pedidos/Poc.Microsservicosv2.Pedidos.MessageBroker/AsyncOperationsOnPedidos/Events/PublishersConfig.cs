@@ -1,0 +1,37 @@
+﻿using Poc.Microsservicosv2.Base.Infra.RabbitMq;
+using Poc.Microsservicosv2.Base.Infra.RabbitMq.Publisher;
+using Poc.Microsservicosv2.Base.Settings;
+using Poc.Microsservicosv2.Base.Settings.MessageBroker.DefaultConfigs;
+using Poc.Microsservicosv2.Pedidos.Domain.Events;
+using RabbitMQ.Client;
+
+namespace Poc.Microsservicosv2.Pedidos.MessageBroker.AsyncOperationsOnPedidos.Events;
+
+public sealed class PublishersConfig
+{
+    public static IEnumerable<PublisherSetup> Register(IConnection connectionRabbitMq, EnvironmentSettings environmentSettings)
+    {
+        string prefixo = nameof(Contexts.Pedidos);
+
+        IModel channelDefault = CreateChannel.Create(connectionRabbitMq);
+        IModel channel01 = CreateChannel.Create(connectionRabbitMq);
+
+        IModel selectedChannel;
+        foreach (var publishConfig in Pedidos.Application.MessageBroker.AsyncOperationsOnPedidos.PublishersEventsConfig.Register())
+        {
+            selectedChannel = channelDefault;
+            if (publishConfig.@event == typeof(PedidoCriadoEvent))
+                selectedChannel = channel01;
+
+            yield return CreatePublisherSetup.CreatePublisherEvents(
+                            publisherChannel: selectedChannel,
+                            @object: publishConfig.@event,
+                            eventKey: publishConfig.eventKey,
+                            exchangeQueueSettings: new ExchangeQueueSettings
+                            {
+                                Exchange = prefixo + environmentSettings.MessageBroker.DefaultConfigs.Events.Exchange,
+                                RoutingKey = publishConfig.routingKey
+                            });
+        }
+    }
+}

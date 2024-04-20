@@ -1,0 +1,6 @@
+@Poc.Microsservicosv2.Pagamento.Api_HostAddress = https://localhost:7243
+
+GET {{Poc.Microsservicosv2.Pagamento.Api_HostAddress}}/home/
+Accept: application/json
+
+###

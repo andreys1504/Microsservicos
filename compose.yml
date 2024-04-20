@@ -1,0 +1,63 @@
+name: microsservicosv2
+services:
+  sqlServerService:
+    container_name: sql-server-microsservicosv2
+    hostname: sqlServerHost
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "SqlServer2019!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    volumes:
+      - sqlServerVolume:/var/opt/mssql
+    ports:
+      - "1433:1433"
+    networks:
+      - microsservicosv2Rede
+
+  mssqltools:
+    container_name: sql-tools-microsservicosv2
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - sqlServerService
+    volumes:
+      - ./start-project/banco-dados/db.sql:/tmp/banco-dados/db.sql
+      - ./start-project/banco-dados/db.sh:/tmp/banco-dados/db.sh
+    command: /bin/bash ./tmp/banco-dados/db.sh
+    networks:
+      - microsservicosv2Rede
+
+  rabbitmq:    
+    container_name: rabbitmq-microsservicosv2
+    hostname: rabbitmq
+    build:
+      context: ./start-project/rabbitmq
+    depends_on:
+      - sqlServerService
+    volumes:
+      - rabbitmqVolume:/var/lib/rabbitmq/mnesia
+    ports:
+      - "15674:15670"
+      - "5674:5670"
+      - "15666:15692"
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "curl -I -s -L http://localhost:15670 || exit 1"
+      ]      
+      interval: 30s
+      timeout: 20s
+      retries: 5
+    networks:
+      - microsservicosv2Rede
+
+volumes:
+  sqlServerVolume:
+    name: microsservicosv2-sqlserver-volume
+  rabbitmqVolume:
+    name: microsservicosv2-rabbitmq-volume
+
+networks:
+  microsservicosv2Rede:
+    name: microsservicosv2-rede
+    driver: bridge

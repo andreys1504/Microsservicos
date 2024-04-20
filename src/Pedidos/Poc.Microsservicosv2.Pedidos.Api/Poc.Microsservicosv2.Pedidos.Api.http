@@ -1,0 +1,6 @@
+@Poc.Microsservicosv2.Pedidos.Api_HostAddress = https://localhost:7127
+
+### NovoPedido
+POST {{Poc.Microsservicosv2.Pedidos.Api_HostAddress}}/pedidos
+Accept: application/json
+Content-Type: application/json

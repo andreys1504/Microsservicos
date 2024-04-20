@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Poc.Microsservicosv2.Pagamento.Ioc\Poc.Microsservicosv2.Pagamento.Ioc.csproj" />
+		<ProjectReference Include="..\Poc.Microsservicosv2.Pegamento.Application\Poc.Microsservicosv2.Pegamento.Application.csproj" />
+	</ItemGroup>
+
+</Project>

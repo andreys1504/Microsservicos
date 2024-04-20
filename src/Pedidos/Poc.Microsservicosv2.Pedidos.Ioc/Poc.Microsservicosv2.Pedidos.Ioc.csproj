@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Poc.Microsservicosv2.Base" Version="2.0.0" />
+		<PackageReference Include="Poc.Microsservicosv2.Ioc" Version="2.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Poc.Microsservicosv2.Pedidos.Application\Poc.Microsservicosv2.Pedidos.Application.csproj" />
+	  <ProjectReference Include="..\Poc.Microsservicosv2.Pedidos.MessageBroker\Poc.Microsservicosv2.Pedidos.MessageBroker.csproj" />
+	</ItemGroup>
+
+</Project>
