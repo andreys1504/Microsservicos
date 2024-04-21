@@ -17,6 +17,10 @@ Exemplo de implementação de microsserviços utilizando .NET/C# e Event-Driven 
 -  Executar:
 docker compose up -d --build
 
+### Pacotes NuGet .Base
+
+No Visual Studio, adicionar um novo 'Package Sources' apontando para a pasta '..\Poc.Microsservicosv2\nupkg'
+
 
 <br />
 <br />
