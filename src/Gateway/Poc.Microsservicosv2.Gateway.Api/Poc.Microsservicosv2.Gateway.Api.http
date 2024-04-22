@@ -1,0 +1,6 @@
+@Poc.Microsservicosv2.Gateway.Api_HostAddress = https://localhost:7057
+
+GET {{Poc.Microsservicosv2.Gateway.Api_HostAddress}}/home/
+Accept: application/json
+
+###

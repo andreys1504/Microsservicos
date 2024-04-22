@@ -3,4 +3,3 @@
 GET {{Poc.Microsservicosv2.Pagamento.Api_HostAddress}}/home/
 Accept: application/json
 
-###

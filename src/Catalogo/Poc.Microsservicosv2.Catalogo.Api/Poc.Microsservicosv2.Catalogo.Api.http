@@ -1,6 +1,5 @@
 @Poc.Microsservicosv2.Catalogo.Api_HostAddress = https://localhost:7213
 
-GET {{Poc.Microsservicosv2.Catalogo.Api_HostAddress}}/home/
+GET {{Poc.Microsservicosv2.Catalogo.Api_HostAddress}}/produto/preco-produto/{idProduto}
 Accept: application/json
 
-###

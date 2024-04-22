@@ -1,0 +1,84 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7057"
+  },
+  "Routes": [
+    //Pedidos
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7127
+        }
+      ],
+      "UpstreamPathTemplate": "/pedidos/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ],
+      "SwaggerKey": "pedidos"
+    },
+    //Catalogo
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7213
+        }
+      ],
+      "UpstreamPathTemplate": "/catalogo/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ],
+      "SwaggerKey": "catalogo"
+    },
+    //Pagamento
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7243
+        }
+      ],
+      "UpstreamPathTemplate": "/pagamento/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ],
+      "SwaggerKey": "pagamento"
+    }
+  ],
+  "SwaggerEndPoints": [
+    //Pedidos
+    {
+      "Key": "pedidos",
+      "Config": [
+        {
+          "Name": "Pedidos",
+          "Version": "v1",
+          "Url": "https://localhost:7127/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    //Catalogo
+    {
+      "Key": "catalogo",
+      "Config": [
+        {
+          "Name": "Catalogo",
+          "Version": "v1",
+          "Url": "https://localhost:7213/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    //Pagamento
+    {
+      "Key": "pagamento",
+      "Config": [
+        {
+          "Name": "Pagamento",
+          "Version": "v1",
+          "Url": "https://localhost:7243/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
